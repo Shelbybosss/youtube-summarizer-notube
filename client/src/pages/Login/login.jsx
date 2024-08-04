@@ -9,7 +9,7 @@ function Login () {
 
     return (
        
-
+        <div className="login-body">
         <div className="Main">
             <div className="innerleft">
 
@@ -84,6 +84,8 @@ function Login () {
                         </div>
                 </div>
             </div>
+        </div>
+
         </div>
     );
 }

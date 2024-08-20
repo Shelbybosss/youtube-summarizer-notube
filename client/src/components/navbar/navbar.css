@@ -1,157 +1,139 @@
+.navbar {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  
+}
+
 .navbar{
-    background-color: #634cff;
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content:space-between;
-    height: 100vh;
-    align-items: center;
-    color: white;
-    font-weight: normal;
-    font-style: normal;
-    
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #0f172aa9;
+  color: white;
+  margin: 0;
+  padding: 0px;
+  padding-top: 15px;
+  
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-.Heading{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10%;
-    
+.navbar ul a{
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-left{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px ;
+  align-items: center;
+}
+
+.navbar-left p{
+  font-size: large;
+  
+}
+
+.navbar-left img{
+  height: 50px;
+  width:  50px;
+
+}
+
+.navbar-left img:hover{
+  cursor: pointer;
+  
+
+}
+
+.navbar-left p:hover{
+  cursor: pointer;
+  
+  color: rgb(33, 170, 255);
+  transition: 0.5s;
+
+}
+
+
+
+.navbar-right ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 20px ;
+  list-style: none;
+}
+
+.navbar-right ul li:hover{
+  cursor: pointer;
+  color: rgb(33, 170, 255);
+  transition: 0.5s;
+
+}
+
+
+/* General Styles for Mobile Devices */
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar {
+    flex-direction: column; /* Stack the navbar items vertically */
+    align-items: flex-start; /* Align items to the left */
+    padding: 10px 20px; /* Add padding for better spacing */
   }
 
-  .Heading h1{
-    margin-left: 10px;
-    font-size:xx-large;
-    font-weight: 500;
-    font-style: normal;
+  .navbar-left {
+    justify-content: center;
+    width: 100%; /* Take full width for better alignment */
+    padding-bottom: 10px;
   }
 
-.Heading img{
-    height: 80px;
-    width: 80px;
+  .navbar-left img {
+    height: 40px;
+    width: 40px; /* Reduce size for smaller screens */
+  }
+
+  .navbar-left p {
+    font-size: medium; /* Reduce font size */
+  }
+
+  .navbar-right ul {
+    flex-direction: column; /* Stack menu items vertically */
+    gap: 15px; /* Reduce the gap between items */
+    width: 100%; /* Take full width */
+  }
+
+  .navbar-right ul li {
+    text-align: left; /* Align text to the left */
+  }
 }
 
-.socialmedia{
-    display: flex;
-    flex-direction: row;
-    gap: 20% ;
-    margin-bottom: 10%;
-    margin-right: 5%;
-}
+/* For Extra Small Devices (e.g., very small mobile phones) */
+@media (max-width: 480px) {
+  /* Navbar */
+  .navbar {
+    padding: 5px 15px; /* Adjust padding for very small screens */
+  }
 
-.socialmedia img{
+  .navbar-left img {
     height: 30px;
-    width: 30px;
-}
-
-.socialmedia img:hover{
-    scale: 1.2;
-    transition: 0.5s ease;
-    cursor: pointer;
-}
-
-.left a{
-    text-decoration: none;
-    color: inherit;
-}
-
-.left a:hover{
-    color: #FFFF99;
-    text-decoration: underline;
-}
-
-
-/* Mobile and Tablet Responsiveness */
-@media (max-width: 1024px) {
-    .navbar {
-      width: 100%;
-      height: auto; /* Allow height to adjust based on content */
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  
-    .Heading {
-      margin-top: 0;
-    }
-  
-    .Heading img {
-      height: 60px;
-      width: 60px;
-    }
-  
-    .socialmedia {
-      gap: 15px;
-    }
-  
-    .left {
-      margin: 5px; /* Adjust spacing for smaller screens */
-    }
-  
-    .left a {
-      font-size: 16px; /* Adjust font size for smaller screens */
-    }
-  
-    .left h2 {
-      font-size: 18px; /* Adjust font size for smaller screens */
-    }
+    width: 30px; /* Further reduce size */
   }
-  
-  @media (max-width: 768px) {
-    .navbar {
-      width: 100%;
-      flex-direction: column;
-      height: auto;
-    }
-  
-    .Heading {
-      flex-direction: column;
-      margin-top: 10px;
-    }
-  
-    .Heading img {
-      height: 50px;
-      width: 50px;
-    }
-  
-    .socialmedia {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .left {
-      margin: 5px 0;
-    }
-  
-    .left a {
-      font-size: 14px; /* Further adjust font size for smaller screens */
-    }
-  
-    .left h2 {
-      font-size: 16px; /* Further adjust font size for smaller screens */
-    }
+
+  .navbar-left p {
+    font-size: small; /* Further reduce font size */
   }
-  
-  @media (max-width: 480px) {
-    .navbar {
-      width: 100%;
-      padding: 10px;
-    }
-  
-    .Heading img {
-      height: 40px;
-      width: 40px;
-    }
-  
-    .socialmedia {
-      gap: 8px;
-    }
-  
-    .left a {
-      font-size: 12px; /* Further adjust font size for very small screens */
-    }
-  
-    .left h2 {
-      font-size: 14px; /* Further adjust font size for very small screens */
-    }
+
+  .navbar-right ul {
+    gap: 10px; /* Further reduce gap */
   }
+
+  .navbar-right ul li {
+    font-size: small; /* Reduce font size for navbar items */
+  }
+}

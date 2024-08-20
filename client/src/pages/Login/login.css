@@ -1,5 +1,5 @@
 .login-body{
-    background-color: #634cfe;
+    background-color: #0f172a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@
 }
 
 .innerleft{
-    background-color: #7065ff;
+    background-color: #1f2c4b9d;
     width: 50%;
     height: 100%;
     border-top-left-radius: 10px;
@@ -31,7 +31,7 @@
 }
 
 .innerright{
-    background-color: #ffffff;
+    background-color: #3a4f6d;
     width: 50%;
     height: 100%;
     border-top-right-radius: 10px;
@@ -99,9 +99,10 @@
     width: 15px;
 }
 .checkboxtext{
-    color: lightslategray;
+    color: rgb(223, 227, 231);
     font-size: small;
     margin-left: 8px;
+    align-items: center;
     
 }
 

@@ -1,0 +1,86 @@
+.sidebyside {
+    display: flex;
+    height: 100vh; /* Ensure the container takes up the full viewport height */
+}
+
+.content {
+    flex-grow: 1;
+    margin: 20px; /* Margin on all four sides */
+    box-sizing: border-box; /* Include padding and border in the element’s total width and height */
+    display: flex;
+    
+    
+    flex-direction: column;
+}
+
+.title {
+    padding: 20px; /* Padding inside the title */
+    color: white;
+    background-color: #634cff;
+    border-radius: 30px;
+    width: 100%; /* Take the full width of the .content container */
+    text-align: center; /* Center text horizontally */
+    box-sizing: border-box; /* Ensure padding is included in the element's width */
+    border: 2px solid black;
+}
+
+.videolink {
+    background-color: #634cff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    padding: 20px; /* Padding inside the form container */
+    width: 100%; /* Take the full width of the .content container */
+    box-sizing: border-box; /* Include padding and border in the element’s total width and height */
+    margin-top: 20px; /* Space between the title and the form */
+    border: 2px solid black;
+}
+
+.forminput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%; /* Ensure the form takes the full width of the parent */
+    
+}
+
+label {
+    margin-bottom: 10px;
+    color: white;
+    font-size: x-large;
+}
+
+input[type="url"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 80%; /* Adjust width as needed */
+    box-sizing: border-box; /* Ensure padding is included in the input's width */
+    border-radius: 20px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: white;
+    color: #634cff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: lightgreen;
+    border-color: black;
+    
+}
+
+
+.summarycanvas{
+    background-color: grey;
+    height: 100vh;
+    width: auto;
+    margin-top: 3%;
+    border-radius: 20px;
+}

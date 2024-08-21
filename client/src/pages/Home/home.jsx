@@ -15,7 +15,7 @@ function Home() {
           <p>Generate Summaries, Mindmaps, Attempt Quiz, and test your knowledge all at one place.</p>
         </div>
         <div className="tryit">
-          <button>Try It..</button>
+          <a href="./app"><button>Try It..</button></a>
         </div>
       </div>
 

@@ -1,86 +1,137 @@
-.sidebyside {
-    display: flex;
-    height: 100vh; /* Ensure the container takes up the full viewport height */
-}
-
-.content {
-    flex-grow: 1;
-    margin: 20px; /* Margin on all four sides */
-    box-sizing: border-box; /* Include padding and border in the element’s total width and height */
-    display: flex;
+.main-hero-section{
+    margin-top:7%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    height: 80vh;
+    width:90%;
     
-    
-    flex-direction: column;
-}
-
-.title {
-    padding: 20px; /* Padding inside the title */
-    color: white;
-    background-color: #634cff;
-    border-radius: 30px;
-    width: 100%; /* Take the full width of the .content container */
-    text-align: center; /* Center text horizontally */
-    box-sizing: border-box; /* Ensure padding is included in the element's width */
-    border: 2px solid black;
-}
-
-.videolink {
-    background-color: #634cff;
+    background-image: url(D:\React_Projects\notube\client\src\assets\bluelight.jpg);
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: larger;
+    color:white;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    border-radius: 30px;
-    padding: 20px; /* Padding inside the form container */
-    width: 100%; /* Take the full width of the .content container */
-    box-sizing: border-box; /* Include padding and border in the element’s total width and height */
-    margin-top: 20px; /* Space between the title and the form */
-    border: 2px solid black;
+
 }
 
-.forminput {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%; /* Ensure the form takes the full width of the parent */
-    
+
+
+.inner-hero h1{
+    text-align: center;
 }
 
-label {
+.urlform{
+    text-align: center;
+    margin-top: 7%;
+}
+
+
+.url-input {
+    padding: 13px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+    font-size: 16px;
     margin-bottom: 10px;
+  }
+  
+  .submit-btn {
+    padding: 13px 20px;
+    background-color: #01aff6;
     color: white;
-    font-size: x-large;
-}
-
-input[type="url"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 80%; /* Adjust width as needed */
-    box-sizing: border-box; /* Ensure padding is included in the input's width */
-    border-radius: 20px;
-    border: none;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: white;
-    color: #634cff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: lightgreen;
-    border-color: black;
+    margin-left: 5%;
+    transition: 1s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: rgb(26, 88, 109);
+    color: greenyellow;
     
-}
+  }
 
 
-.summarycanvas{
-    background-color: grey;
-    height: 100vh;
-    width: auto;
-    margin-top: 3%;
-    border-radius: 20px;
-}
+  .generatedsummary-canvas{
+    margin: 5%;
+    height:100vh;
+    width:90%;
+    border-radius: 15px;
+    background-color: #e2e8f0;
+    font-size: 1.1rem; 
+    line-height: 1.6;
+  }
+
+  .generatedsummary-canvas h2 {
+    font-size: 1.5rem; /* Title for summary */
+    color: #000; 
+    margin-bottom: 15px;
+    text-align: center;
+    padding-top: 3%;
+  }
+  
+  .generatedsummary-canvas p {
+    font-size: 1.1rem;
+    color: #555; /* Lighter color for text */
+    margin: 5%;
+  }
+  
+
+  .generatedmindmap-canvas{
+    margin: 5%;
+    width: 90%;
+    height: 90vh;
+    background-color: #e2e8f0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+
+  .generatedmindmap-canvas img{
+    height: 70%;
+    width: 60%;
+    
+  }
+
+  .generatedmindmap-canvas button{
+    margin-top: 2%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: black;
+    background-color: #01aff6;
+    color: white;
+    transition: 0.5s ease;
+  }
+
+  .generatedmindmap-canvas button:hover{
+    color: greenyellow;
+    background-color: rgb(26, 88, 109);
+    cursor: pointer;
+  }
+
+
+  .generatedquiz-canvas{
+    margin: 5%;
+    width: 90%;
+    height: 80vh;
+    background-color: #e2e8f0;
+    border-radius: 15px;
+  }

@@ -10,7 +10,7 @@ function Navbar () {
 
                 <div className="navbar-left">
                     <img src="src\assets\robot-man_3273805.png"></img>
-                    <p>YOUTUBE SUMMARIZER</p>
+                    <p>NO-TUBE</p>
                 </div>
 
                 <div className="navbar-right">

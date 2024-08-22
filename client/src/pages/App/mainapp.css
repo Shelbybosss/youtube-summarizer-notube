@@ -6,7 +6,7 @@
     height: 80vh;
     width:90%;
     
-    background-image: url(D:\React_Projects\notube\client\src\assets\bluelight.jpg);
+    background-image: url(../../assets/bluelight.jpg);
     background-repeat: none;
     background-size: cover;
     background-position: center;

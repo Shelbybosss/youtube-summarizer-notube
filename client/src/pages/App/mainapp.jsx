@@ -62,7 +62,7 @@ function MainApp() {
         </div>
 
         <div className="generatedquiz-canvas">
-
+            
         </div>
 
         <Footer></Footer>

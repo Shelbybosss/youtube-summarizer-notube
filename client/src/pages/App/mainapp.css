@@ -134,3 +134,22 @@
     background-color: #e2e8f0;
     border-radius: 15px;
   }
+
+  .generatedmindmap-canvas {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.download-button:hover {
+    background-color: #45a049;
+}

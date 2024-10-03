@@ -5,31 +5,57 @@ import React, { useState } from "react";
 
 function MainApp() {
     const [url, setUrl] = useState("");
+    const [summary, setSummary] = useState("");
+    const [mindmapUrl, setMindmapUrl] = useState(""); // To store mindmap URL
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event) => {
-      event.preventDefault();
+        event.preventDefault();
+        setLoading(true);
 
-      try {
-        // Send the URL to your backend server
-        const response = await fetch("http://localhost:3000/submit-url", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ url }),  // Send the URL as JSON
-        });
+        try {
+            const response = await fetch("http://localhost:3000/submit-url", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ url }),
+            });
 
-        const result = await response.text();
-        console.log("Server Response:", result);  // Log response from server
+            const result = await response.json();
+            setSummary(result.summary);
 
-      } catch (error) {
-        console.error("Error submitting URL:", error);
-      }
+            // After fetching the summary, generate the mindmap
+            generateMindmap(result.summary);
+
+        } catch (error) {
+            console.error("Error submitting URL:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const generateMindmap = async (summaryText) => {
+        try {
+            const mindmapResponse = await fetch("http://localhost:3000/generate-mindmap", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ summary: summaryText }),
+            });
+
+            const mindmapResult = await mindmapResponse.json();
+            setMindmapUrl(mindmapResult.mindmapUrl);  // Set the mindmap URL
+
+        } catch (error) {
+            console.error("Error generating mindmap:", error);
+        }
     };
 
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar />
 
             <div className="main-hero-section">
                 <div className="inner-hero">
@@ -45,32 +71,31 @@ function MainApp() {
                             placeholder="Enter URL"
                             required
                         />
-                        <button type="submit" className="submit-btn">Submit</button>
+                        <button type="submit" className="submit-btn" disabled={loading}>
+                            {loading ? "Processing..." : "Submit"}
+                        </button>
                     </form>
                 </div>
             </div>
 
-            <div className="generatedsummary-canvas">
-                <h2>The Mysterious Forest</h2>
-                <p>
-                  Once upon a time, deep within an enchanted forest, there was a small village where the villagers lived in harmony with nature.
-                  One day, a young boy named Leo wandered into the forest, following a trail of glowing butterflies.
-                  As he ventured further, he stumbled upon a hidden grove where an ancient tree whispered forgotten secrets.
-                  The tree revealed that Leo had the power to communicate with nature, and with his newfound ability,
-                  he helped the villagers protect the forest from a looming danger.
-                  From that day on, the village and the forest thrived together, bound by a magical bond that could never be broken.
-                </p>
-            </div>
+            {loading && <p>Loading summary...</p>}
 
-            <div className="generatedmindmap-canvas">
-                <h2>Mindmap</h2>
-                <img src="src/assets/mindmap.jpg" alt="Mindmap" />
-                <button className="download-button">Download</button>
-            </div>
+            {!loading && summary && (
+                <div className="generatedsummary-canvas">
+                    <h2>Generated Summary</h2>
+                    <p>{summary}</p>
+                </div>
+            )}
 
-            <div className="generatedquiz-canvas"></div>
+            {!loading && mindmapUrl && (
+                <div className="generatedmindmap-canvas">
+                    <h2>Mindmap</h2>
+                    <img src={mindmapUrl} alt="Mindmap" />
+                    <a href={mindmapUrl} download className="download-button">Download</a>
+                </div>
+            )}
 
-            <Footer></Footer>
+            <Footer />
         </>
     );
 }

@@ -76,6 +76,25 @@ app.post('/submit-url', async (req, res) => {
   }
 });
 
+// Route to generate mindmap based on summary
+app.post('/generate-mindmap', async (req, res) => {
+  const { summary } = req.body;
+
+  try {
+    // You can use a mind-mapping API or custom logic to generate a mindmap here.
+    // For now, let's assume you generate a mindmap image (mocked response).
+
+    // Mocked mindmap URL (in reality, you'd generate and store this image)
+    const mindmapUrl = 'http://localhost:3000/assets/generated-mindmap.jpg'; // Example path where mindmap is stored
+
+    res.json({ mindmapUrl });
+  } catch (error) {
+    console.error('Error generating mindmap:', error);
+    res.status(500).send('Error generating mindmap');
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

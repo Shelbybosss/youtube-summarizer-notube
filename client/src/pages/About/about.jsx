@@ -1,10 +1,12 @@
 import React from 'react';
 import './about.css'; // Import your stylesheet
+import Navbar from "../../components/navbar/navbar";
 
 
     const About = () => {
         return (
           <>
+          <Navbar></Navbar>
             <section className="purpose-vision">
               <div className="box-container">
                 <div className="content">

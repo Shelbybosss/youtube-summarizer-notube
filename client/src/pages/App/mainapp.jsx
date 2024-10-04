@@ -82,10 +82,13 @@ function MainApp() {
 
             {!loading && summary && (
                 <div className="generatedsummary-canvas">
-                    <h2>Generated Summary</h2>
-                    <p>{summary}</p>
+                  <h2>Generated Summary</h2>
+                  <div className="Summary-Content">
+                  <div dangerouslySetInnerHTML={{ __html: summary }} />
+                  </div>
                 </div>
-            )}
+                )}
+
 
             {!loading && mindmapUrl && (
                 <div className="generatedmindmap-canvas">

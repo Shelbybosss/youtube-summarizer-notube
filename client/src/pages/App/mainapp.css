@@ -94,13 +94,16 @@
   .generatedmindmap-canvas{
     margin: 5%;
     width: 90%;
-    height: 90vh;
+    height: auto;
+    overflow: hidden;
     background-color: #e2e8f0;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+ 
 
   }
 

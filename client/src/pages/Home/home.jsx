@@ -1,6 +1,8 @@
 import "./home.css";
 import Navbar from "../../components/navbar/navbar";
 import Footer from "../../components/footer/Footer";
+import { BackgroundLinesDemo } from "../../background_lines";
+import { SparklesPreview } from "../../notube";
 
 function Home() {
   return (
@@ -10,7 +12,7 @@ function Home() {
       
       {/* Hero */}
       <div className="hero">
-        <div className="heading">
+      <div className="heading">
           <h2>Summarize Your Youtube Videos in One Go!</h2>
           <p>Generate Summaries, Mindmaps, Attempt Quiz, and test your knowledge all at one place.</p>
         </div>

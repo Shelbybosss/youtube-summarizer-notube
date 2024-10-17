@@ -1,0 +1,88 @@
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto; /* Centering with automatic margins */
+  padding: 30px; /* Padding for inner content */
+  border: 1px solid #ddd; /* Lighter border for a softer look */
+  border-radius: 10px; /* Slightly more rounded corners */
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow for better depth */
+  transition: box-shadow 0.3s; /* Smooth transition for hover effect */
+  width: 80%; /* Set width to 70% */
+  margin-top: 10%;
+  max-width: 800px; /* Maximum width for larger screens */
+}
+
+.file-upload-container:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Shadow effect on hover */
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #634cfe;
+  font-size: 28px; /* Larger font size for the header */
+  text-align: center; /* Centered header */
+}
+
+input[type="file"] {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Full width for better alignment */
+  max-width: 400px; /* Maximum width for input */
+  font-size: 16px; /* Increased font size for better readability */
+}
+
+button {
+  padding: 12px 20px; /* Increased padding for a more substantial button */
+  border: none;
+  border-radius: 4px;
+  background-color: #634cfe;
+  color: white;
+  font-size: 16px; /* Increased font size for better visibility */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Added transform for button scaling */
+}
+
+button:hover {
+  background-color: #5038d1;
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.summary {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 700px; /* Keep consistent with other components */
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Hide overflow to maintain clean appearance */
+}
+
+.summary-content {
+  max-height: 300px; /* Limit height for long summaries */
+  overflow-y: auto; /* Enable scrolling */
+  margin-top: 10px;
+  padding: 10px; /* Padding for inner content */
+  background-color: #f7f7f7; /* Light background for better contrast */
+  border-radius: 4px; /* Rounded corners for summary content */
+}
+
+h3 {
+  color: #634cfe;
+  font-size: 20px; /* Increased font size for better readability */
+  margin: 10px 0; /* Margin for spacing */
+}

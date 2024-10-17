@@ -13,10 +13,9 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: '10mb' })); // Set the limit as needed
 app.use(cors());
-
 // Initialize Google Generative AI (Gemini) with the API key from environment variables
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -167,7 +166,6 @@ Provide a JSON structure with 'topic' and 'subtopics' keys. Example:
   return processMindmap(mindmap);
 }
 
-<<<<<<< HEAD
 //Voice Summary
 
 // Voice Summary Endpoint
@@ -211,7 +209,7 @@ Length: Keep the summary concise, ideally between 150-300 words.
 
 Clarity: Use simple language and structure to make the summary easy to understand. Break complex ideas into simpler statements.
 
-Please summarize the following transcript and return the result as HTML code:\n${transcript}`);
+Please summarize the following transcript and return the result:\n${transcript}`);
 
     // Extract the summarized text from the result
     return result.response.text();
@@ -220,16 +218,160 @@ Please summarize the following transcript and return the result as HTML code:\n$
     return 'Failed to summarize transcript.';
   }
 };
-=======
 
->>>>>>> 86b5554bdef2e86e5290a71c7f0c1159f9fa9372
+//Function for quiz generation
 
+app.post('/filesummarize', async (req, res) => {
+  const { pdfText } = req.body; // Extract the PDF text from request body
+  console.log('Received PDF text:', pdfText); // Log it for debugging
+
+  if (!pdfText) {
+    return res.status(400).json({ error: 'PDF text is required' });
+  }
+
+  try {
+    // Call the summarizePdfText function to get the summary
+    const summary = await summarizePdfText(pdfText);
+    
+    // Respond with the generated summary
+    res.json({ message: 'PDF text received successfully', summary });
+  } catch (error) {
+    console.error('Error generating summary:', error);
+    return res.status(500).json({ error: 'Failed to generate summary' });
+  }
+});
+
+// PDF Summary Function
+const summarizePdfText = async (pdfText) => {
+  try {
+    // Get the generative model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    // Use the generateContent method to get a summary
+    const result = await model.generateContent(`You are an advanced language model tasked with summarizing a provided PDF text accurately and concisely. Your summary should reflect the content with at least 95% accuracy and be structured in HTML format.
+
+Understand the Context: Read the entire text to comprehend the document’s theme, purpose, and key arguments. Ensure that all critical points are included in the summary.
+
+Key Information to Include:
+
+Main Topics: Structure each key topic as a heading using <h3>.
+Important Details: Present each key detail, fact, or argument in a bullet-pointed list under each heading using <ul> and <li> tags.
+Conclusions: Ensure the final takeaways or conclusions are also included in the bullet points.
+Length: Keep the summary concise, ideally between 150-300 words.
+
+Clarity: Use simple language and structure to make the summary easy to understand. Break complex ideas into simpler statements.
+
+Please summarize the following text and return the result as HTML code:\n${pdfText}`);
+
+    // Extract the summarized text from the result
+    return result.response.text();
+  } catch (error) {
+    console.error('Error summarizing PDF text with Gemini:', error.message);
+    return 'Failed to summarize PDF text.';
+  }
+};
+
+
+//wordfile
+// Word Summary Endpoint
+app.post('/summarize-word', async (req, res) => {
+  const { transcript } = req.body; // Extract transcript from request body
+  
+
+  if (!transcript) {
+    return res.status(400).json({ error: 'Transcript is required' });
+  }
+
+  try {
+    // Call the wordSummary function to get the summary
+    const summary = await wordSummary(transcript);
+    
+    // Respond with the generated summary
+    res.json({ message: 'Transcript received successfully', summary });
+  } catch (error) {
+    console.error('Error generating summary:', error);
+    return res.status(500).json({ error: 'Failed to generate summary' });
+  }
+});
+
+// Word Summary Function
+const wordSummary = async (transcript) => {
+  try {
+    // Get the generative model
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    // Use the generateContent method to get a summary
+    const result = await model.generateContent(`You are an advanced language model tasked with summarizing a Word document accurately and concisely. Your summary should reflect the content with at least 95% accuracy and be structured in HTML format.
+
+    Understand the Context: Read the entire transcript to comprehend the document’s theme, purpose, and key arguments. Ensure that all critical points are included in the summary.
+
+    Key Information to Include:
+
+    Main Topics: Structure each key topic as a heading using <h3>.
+    Important Details: Present each key detail, fact, or argument in a bullet-pointed list under each heading using <ul> and <li> tags.
+    Conclusions: Ensure the final takeaways or conclusions are also included in the bullet points.
+    Length: Keep the summary concise, ideally between 150-300 words.
+
+    Clarity: Use simple language and structure to make the summary easy to understand. Break complex ideas into simpler statements.
+
+    Please summarize the following transcript and return the result:\n${transcript}`);
+
+    // Extract the summarized text from the result
+    return result.response.text();
+  } catch (error) {
+    console.error('Error summarizing transcript with Gemini:', error.message);
+    return 'Failed to summarize transcript.';
+  }
+};
+
+
+
+//QUIZ LOGIC
+
+// Function to generate quiz based on summary
+const generateQuizFromSummary = async (summary) => {
+  try {
+    // Sending the summary to Gemini to generate quiz questions
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const result = await model.generateContent(`
+      Based on the following summary, create a set of quiz questions that test comprehension of the key points. 
+      Provide 5 questions in the following format:
+      
+      Question 1:
+      - Question text: [text]
+      - Option 1: [option1]
+      - Option 2: [option2]
+      - Option 3: [option3]
+      - Correct answer: [correct answer]
+
+      Summary: ${summary}
+    `);
+
+    return result.response.text(); // Return quiz response text
+  } catch (error) {
+    console.error('Error generating quiz:', error.message);
+    return 'Failed to generate quiz.';
+  }
+};
+
+// Route to generate quiz based on the summary
+app.post('/generate-quiz', async (req, res) => {
+  const { summary } = req.body;
+
+  try {
+    // Generate quiz from the summary
+    const quiz = await generateQuizFromSummary(summary);
+
+    // Send the quiz back to the frontend
+    res.json({ quiz });
+  } catch (error) {
+    console.error('Error generating quiz:', error);
+    res.status(500).send('Error generating quiz');
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 86b5554bdef2e86e5290a71c7f0c1159f9fa9372

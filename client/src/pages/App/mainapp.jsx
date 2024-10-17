@@ -8,7 +8,11 @@ import * as d3 from "d3"; // Import D3.js
 function MainApp() {
     const [url, setUrl] = useState("");
     const [summary, setSummary] = useState("");
+    
+
     const [mindmapData, setMindmapData] = useState(""); // Store the Mermaid syntax
+    
+
     const [loading, setLoading] = useState(false);
 
     // Initialize Mermaid when the component mounts
@@ -165,6 +169,10 @@ function MainApp() {
             .call(zoom)
             .on("wheel.zoom", null); // Disable zoom on scroll
     };
+
+    //QUIZ
+
+    
     
     return (
         <>
@@ -289,6 +297,9 @@ function MainApp() {
         </button>
     </div>
 )}
+
+
+
 
             <Footer />
         </>

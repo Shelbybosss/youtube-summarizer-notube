@@ -17,12 +17,11 @@ function Navbar () {
                     <ul>
                         <a href="./home"><li>HOME</li></a>
                         <a href="./app"><li>APP</li></a>
-<<<<<<< HEAD
-                        <a href="./voice">VOICE</a>
-=======
->>>>>>> 86b5554bdef2e86e5290a71c7f0c1159f9fa9372
+                        <a href="./voice"><li>VOICE</li></a>
+                        <a href="./fileselect"><li>UPLOAD FILE</li></a>
                         <a href="./login"><li>LOGIN</li></a>
                         <a href="./about"><li>ABOUT</li></a>
+                        
 
         
                     </ul>

@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "d3": "^7.9.0",
+    "dotenv": "^16.4.5",
+<<<<<<< HEAD
+    "express": "^4.21.1",
+=======
+    "express": "^4.21.0",
+>>>>>>> 86b5554bdef2e86e5290a71c7f0c1159f9fa9372
+    "html2canvas": "^1.4.1",
+    "nodemon": "^3.1.7",
+    "youtube-transcript": "^1.2.1"
+  }
+}

@@ -261,7 +261,7 @@ Length: Keep the summary concise, ideally between 150-300 words.
 
 Clarity: Use simple language and structure to make the summary easy to understand. Break complex ideas into simpler statements.
 
-Please summarize the following text and return the result as HTML code:\n${pdfText}`);
+Please summarize the following text and return the result:\n${pdfText}`);
 
     // Extract the summarized text from the result
     return result.response.text();
@@ -329,7 +329,8 @@ const wordSummary = async (transcript) => {
 //QUIZ LOGIC
 
 // Function to generate quiz based on summary
-const generateQuizFromSummary = async (summary) => {
+// Function to generate quiz based on summary
+const generateQuizFromSummary = async (summaryText) => {
   try {
     // Sending the summary to Gemini to generate quiz questions
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -345,7 +346,7 @@ const generateQuizFromSummary = async (summary) => {
       - Option 3: [option3]
       - Correct answer: [correct answer]
 
-      Summary: ${summary}
+      Summary: ${summaryText}
     `);
 
     return result.response.text(); // Return quiz response text
@@ -355,21 +356,7 @@ const generateQuizFromSummary = async (summary) => {
   }
 };
 
-// Route to generate quiz based on the summary
-app.post('/generate-quiz', async (req, res) => {
-  const { summary } = req.body;
-
-  try {
-    // Generate quiz from the summary
-    const quiz = await generateQuizFromSummary(summary);
-
-    // Send the quiz back to the frontend
-    res.json({ quiz });
-  } catch (error) {
-    console.error('Error generating quiz:', error);
-    res.status(500).send('Error generating quiz');
-  }
-});
+// Route to generate quiz based on the su
 
 // Start the server
 app.listen(port, () => {

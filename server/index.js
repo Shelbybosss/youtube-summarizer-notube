@@ -330,6 +330,7 @@ const wordSummary = async (transcript) => {
 
 // Function to generate quiz based on summary
 // Function to generate quiz based on summary
+// Function to generate quiz based on summary
 const generateQuizFromSummary = async (summaryText) => {
   try {
     // Sending the summary to Gemini to generate quiz questions
@@ -356,6 +357,21 @@ const generateQuizFromSummary = async (summaryText) => {
   }
 };
 
+// Route to generate quiz based on the summary
+app.post('/generate-quiz', async (req, res) => {
+  const { summary } = req.body;
+
+  try {
+    // Generate quiz from the summary
+    const quiz = await generateQuizFromSummary(summary);
+
+    // Send the quiz back to the frontend
+    res.json({ quiz });
+  } catch (error) {
+    console.error('Error generating quiz:', error);
+    res.status(500).send('Error generating quiz');
+  }
+});
 // Route to generate quiz based on the su
 
 // Start the server

@@ -8,12 +8,12 @@ import * as d3 from "d3"; // Import D3.js
 function MainApp() {
     const [url, setUrl] = useState("");
     const [summary, setSummary] = useState("");
-    
-
     const [mindmapData, setMindmapData] = useState(""); // Store the Mermaid syntax
-    
-
     const [loading, setLoading] = useState(false);
+
+    // Quiz-related states
+    const [quiz, setQuiz] = useState(null); // State to store the generated quiz
+    const [isLoadingQuiz, setIsLoadingQuiz] = useState(false); // State for quiz loading
 
     // Initialize Mermaid when the component mounts
     useEffect(() => {
@@ -170,10 +170,28 @@ function MainApp() {
             .on("wheel.zoom", null); // Disable zoom on scroll
     };
 
-    //QUIZ
+    // Function to handle quiz generation
+    const generateQuiz = async () => {
+        setIsLoadingQuiz(true); // Show loading state
 
-    
-    
+        try {
+            const response = await fetch('http://localhost:3000/generate-quiz', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ summary }),
+            });
+
+            const data = await response.json();
+            setQuiz(data.quiz); // Store the quiz questions in state
+        } catch (error) {
+            console.error('Error generating quiz:', error);
+        }
+
+        setIsLoadingQuiz(false); // Hide loading state
+    };
+
     return (
         <>
             <Navbar />
@@ -203,103 +221,35 @@ function MainApp() {
 
             {!loading && summary && (
                 <div className="generatedsummary-canvas">
-                  <h2>Generated Summary</h2>
-                  <div className="Summary-Content">
-                  <div dangerouslySetInnerHTML={{ __html: summary }} />
-                  </div>
+                    <h2>Generated Summary</h2>
+                    <div className="Summary-Content">
+                        <div dangerouslySetInnerHTML={{ __html: summary }} />
+                    </div>
                 </div>
             )}
 
-{!loading && mindmapData && (
-    <div className="generatedmindmap-canvas" style={{ position: "relative", minHeight: "600px", paddingBottom: "50px" }}>
-        <h2>Mindmap</h2>
-        {/* This div will hold the dynamically rendered D3 diagram */}
+            {!loading && mindmapData && (
+                <div className="generatedmindmap-canvas" style={{ position: "relative", minHeight: "600px", paddingBottom: "50px" }}>
+                    <h2>Mindmap</h2>
+                </div>
+            )}
 
-        {/* Download button */}
-        <button
-            onClick={() => {
-                const svgElement = document.querySelector(".generatedmindmap-canvas svg");
+            {/* Quiz generation button */}
+            {!loading && summary && (
+                <div style={{ textAlign: "center", marginTop: "20px" }}>
+                    <button onClick={generateQuiz} disabled={isLoadingQuiz} className="quiz-submit-btn">
+                        {isLoadingQuiz ? 'Generating Quiz...' : 'Generate Quiz'}
+                    </button>
+                </div>
+            )}
 
-                if (svgElement) {
-                    // Function to inline styles from CSS into the SVG elements
-                    const inlineStyles = (svg) => {
-                        const styles = window.getComputedStyle(svg);
-                        const svgClone = svg.cloneNode(true);
-                        const allElements = svgClone.querySelectorAll("*");
-
-                        allElements.forEach((el) => {
-                            const computedStyles = window.getComputedStyle(el);
-                            for (let i = 0; i < computedStyles.length; i++) {
-                                const key = computedStyles[i];
-                                el.style[key] = computedStyles.getPropertyValue(key);
-                            }
-                        });
-
-                        return svgClone;
-                    };
-
-                    // Inline styles into the SVG
-                    const styledSvgElement = inlineStyles(svgElement);
-
-                    // Convert the SVG to a string
-                    const serializer = new XMLSerializer();
-                    const svgString = serializer.serializeToString(styledSvgElement);
-
-                    // Create a canvas and set its dimensions
-                    const canvas = document.createElement("canvas");
-                    canvas.width = svgElement.clientWidth;
-                    canvas.height = svgElement.clientHeight;
-                    const ctx = canvas.getContext("2d");
-
-                    // Set a white background on the canvas
-                    ctx.fillStyle = "#ffffff";
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    // Create an image from the SVG
-                    const img = new Image();
-                    const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-                    const url = URL.createObjectURL(svgBlob);
-
-                    img.onload = function() {
-                        // Draw the SVG image onto the canvas
-                        ctx.drawImage(img, 0, 0);
-                        URL.revokeObjectURL(url); // Free up the URL object
-
-                        // Create a PNG from the canvas
-                        const pngUrl = canvas.toDataURL("image/png");
-
-                        // Trigger the download
-                        const downloadLink = document.createElement("a");
-                        downloadLink.href = pngUrl;
-                        downloadLink.download = "mindmap.png";
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        document.body.removeChild(downloadLink);
-                    };
-
-                    img.src = url;
-                }
-            }}
-            style={{
-                position: "absolute",
-                bottom: "20px",  // Keep some space from the bottom
-                left: "50%",
-                transform: "translateX(-50%)",
-                padding: "10px 20px",
-                backgroundColor: "#4CAF50",
-                color: "#fff",
-                border: "none",
-                borderRadius: "5px",
-                cursor: "pointer",
-            }}
-        >
-            Download PNG
-        </button>
-    </div>
-)}
-
-
-
+            {/* Display the generated quiz */}
+            {quiz && (
+                <div className="quiz-container">
+                    <h3>Generated Quiz</h3>
+                    <pre>{quiz}</pre> {/* Display the raw quiz for now */}
+                </div>
+            )}
 
             <Footer />
         </>
